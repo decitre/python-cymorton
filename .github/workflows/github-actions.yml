@@ -18,7 +18,7 @@ jobs:
             python: '3.6'
             toxpython: 'python3.6'
             python_arch: 'x64'
-            tox_env: 'py36-cover,codecov'
+            tox_env: 'py36-cover'
             cibw_arch: 'x86_64'
             cibw_build: false
             os: 'ubuntu-latest'
@@ -26,7 +26,7 @@ jobs:
             python: '3.6'
             toxpython: 'python3.6'
             python_arch: 'x64'
-            tox_env: 'py36-cover,codecov'
+            tox_env: 'py36-cover'
             cibw_arch: 'AMD64'
             cibw_build: false
             os: 'windows-latest'
@@ -34,7 +34,7 @@ jobs:
             python: '3.6'
             toxpython: 'python3.6'
             python_arch: 'x64'
-            tox_env: 'py36-cover,codecov'
+            tox_env: 'py36-cover'
             cibw_arch: 'x86_64'
             cibw_build: false
             os: 'macos-latest'
@@ -98,7 +98,7 @@ jobs:
             python: '3.7'
             toxpython: 'python3.7'
             python_arch: 'x64'
-            tox_env: 'py37-cover,codecov'
+            tox_env: 'py37-cover'
             cibw_arch: 'x86_64'
             cibw_build: false
             os: 'ubuntu-latest'
@@ -106,7 +106,7 @@ jobs:
             python: '3.7'
             toxpython: 'python3.7'
             python_arch: 'x64'
-            tox_env: 'py37-cover,codecov'
+            tox_env: 'py37-cover'
             cibw_arch: 'AMD64'
             cibw_build: false
             os: 'windows-latest'
@@ -114,7 +114,7 @@ jobs:
             python: '3.7'
             toxpython: 'python3.7'
             python_arch: 'x64'
-            tox_env: 'py37-cover,codecov'
+            tox_env: 'py37-cover'
             cibw_arch: 'x86_64'
             cibw_build: false
             os: 'macos-latest'
@@ -178,7 +178,7 @@ jobs:
             python: '3.8'
             toxpython: 'python3.8'
             python_arch: 'x64'
-            tox_env: 'py38-cover,codecov'
+            tox_env: 'py38-cover'
             cibw_arch: 'x86_64'
             cibw_build: false
             os: 'ubuntu-latest'
@@ -186,7 +186,7 @@ jobs:
             python: '3.8'
             toxpython: 'python3.8'
             python_arch: 'x64'
-            tox_env: 'py38-cover,codecov'
+            tox_env: 'py38-cover'
             cibw_arch: 'AMD64'
             cibw_build: false
             os: 'windows-latest'
@@ -194,7 +194,7 @@ jobs:
             python: '3.8'
             toxpython: 'python3.8'
             python_arch: 'x64'
-            tox_env: 'py38-cover,codecov'
+            tox_env: 'py38-cover'
             cibw_arch: 'x86_64'
             cibw_build: false
             os: 'macos-latest'
@@ -258,7 +258,7 @@ jobs:
             python: '3.9'
             toxpython: 'python3.9'
             python_arch: 'x64'
-            tox_env: 'py39-cover,codecov'
+            tox_env: 'py39-cover'
             cibw_arch: 'x86_64'
             cibw_build: false
             os: 'ubuntu-latest'
@@ -266,7 +266,7 @@ jobs:
             python: '3.9'
             toxpython: 'python3.9'
             python_arch: 'x64'
-            tox_env: 'py39-cover,codecov'
+            tox_env: 'py39-cover'
             cibw_arch: 'AMD64'
             cibw_build: false
             os: 'windows-latest'
@@ -274,7 +274,7 @@ jobs:
             python: '3.9'
             toxpython: 'python3.9'
             python_arch: 'x64'
-            tox_env: 'py39-cover,codecov'
+            tox_env: 'py39-cover'
             cibw_arch: 'x86_64'
             cibw_build: false
             os: 'macos-latest'
@@ -338,7 +338,7 @@ jobs:
             python: '3.10'
             toxpython: 'python3.10'
             python_arch: 'x64'
-            tox_env: 'py310-cover,codecov'
+            tox_env: 'py310-cover'
             cibw_arch: 'x86_64'
             cibw_build: false
             os: 'ubuntu-latest'
@@ -346,7 +346,7 @@ jobs:
             python: '3.10'
             toxpython: 'python3.10'
             python_arch: 'x64'
-            tox_env: 'py310-cover,codecov'
+            tox_env: 'py310-cover'
             cibw_arch: 'AMD64'
             cibw_build: false
             os: 'windows-latest'
@@ -354,7 +354,7 @@ jobs:
             python: '3.10'
             toxpython: 'python3.10'
             python_arch: 'x64'
-            tox_env: 'py310-cover,codecov'
+            tox_env: 'py310-cover'
             cibw_arch: 'x86_64'
             cibw_build: false
             os: 'macos-latest'

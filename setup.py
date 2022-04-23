@@ -39,6 +39,7 @@ else:
 
 class BinaryDistribution(Distribution):
     """Distribution which almost always forces a binary package with platform name"""
+
     def has_ext_modules(self):
         return super().has_ext_modules() or not os.environ.get('SETUPPY_ALLOW_PURE')
 
@@ -78,8 +79,11 @@ def get_requirements(file_path: str, no_precise_version: bool = False) -> List[s
 
 
 def read(*names, **kwargs):
-    with io.open(join(dirname(__file__), *names), encoding=kwargs.get('encoding', 'utf8')) as fh:
+    with io.open(
+        join(dirname(__file__), *names), encoding=kwargs.get('encoding', 'utf8')
+    ) as fh:
         return fh.read()
+
 
 project_name = "cymorton"
 github_home = "https://github.com/decitre"
@@ -104,8 +108,9 @@ if __name__ == '__main__':
         version='0.0.1',
         license='MIT',
         description='A morton code codec in c++/cython',
-        long_description=re.compile('^.. start-badges.*^.. end-badges', re.M | re.S)
-            .sub('', read('README.rst')),
+        long_description=re.compile(
+            '^.. start-badges.*^.. end-badges', re.M | re.S
+        ).sub('', read('README.rst')),
         author='Emmanuel Decitre',
         url=f'{github_home}/python-{project_name}',
         packages=find_packages(_packages_path),
@@ -131,17 +136,19 @@ if __name__ == '__main__':
         python_requires='>=3.6',
         install_requires=requirements,
         extras_require={"dev": requirements_test},
-        setup_requires=['cython', ] if Cython else [],
-        entry_points={
-            'console_scripts': [f'{project_name} = {project_name}.cli:main']
-        },
+        setup_requires=[
+            'cython',
+        ]
+        if Cython
+        else [],
+        entry_points={'console_scripts': [f'{project_name} = {project_name}.cli:main']},
         ext_modules=[
             Extension(
                 splitext(relpath(path, 'src').replace(os.sep, '.'))[0],
                 sources=[path],
                 extra_compile_args=CFLAGS.split(),
                 extra_link_args=LFLAGS.split(),
-                include_dirs=[dirname(path)]
+                include_dirs=[dirname(path)],
             )
             for root, _, _ in os.walk('src')
             for path in glob(join(root, '*.pyx' if Cython else '*.c'))
