@@ -15,6 +15,7 @@ include LICENSE
 include README.rst
 include requirements.txt
 include requirements_test.txt
+include src/cymorton/*
 
 
 global-exclude *.py[cod] __pycache__/* *.so *.dylib
