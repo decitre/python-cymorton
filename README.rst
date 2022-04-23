@@ -61,30 +61,3 @@ You can also install the in-development version with::
 
     pip install https://github.com/decitre/python-cymorton/archive/master.zip
 
-
-Usage
-============
-
-::
-
-cli::
-
-    $ cymorton --help
-    Usage: cymorton [OPTIONS] LAT LON Z
-
-      Prints the Morton code for LAT and LON at Z level
-
-    Options:
-      --version  Show the version and exit.
-      --help     Show this message and exit.
-
-    $ cymorton 50.0 13.0 12
-    23612293
-
-Python call::
-
-
-    >>> import cymorton.codec
-    >>> cymorton.codec.convert_lat_lon_level_to_code(50.0, 13.0, 12)
-    23612293
-
