@@ -23,4 +23,3 @@ def test_convert_xy_level_to_code():
 
 def test_convert_lat_lon_level_to_code():
     assert convert_lat_lon_level_to_code(9.165507, 105.219986, 12) == 24145105
-
