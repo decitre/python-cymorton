@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
-
 import io
 import os
 import re
@@ -18,6 +15,7 @@ from setuptools import setup
 from setuptools.dist import Distribution
 from pathlib import Path
 
+from Cython.Build import cythonize
 
 try:
     # Allow installing package without any Cython available. This
@@ -25,16 +23,6 @@ try:
     import Cython
 except ImportError:
     Cython = None
-
-# Enable code coverage for C code: we can't use CFLAGS=-coverage in tox.ini, since that may mess with compiling
-# dependencies (e.g. numpy). Therefore we set SETUPPY_CFLAGS=-coverage in tox.ini and copy it to CFLAGS here (after
-# deps have been safely installed).
-if 'TOX_ENV_NAME' in os.environ and os.environ.get('SETUPPY_EXT_COVERAGE') == 'yes':
-    CFLAGS = os.environ['CFLAGS'] = '-DCYTHON_TRACE=1'
-    LFLAGS = os.environ['LFLAGS'] = ''
-else:
-    CFLAGS = ''
-    LFLAGS = ''
 
 
 class BinaryDistribution(Distribution):
@@ -63,7 +51,7 @@ def get_property(prop, packages_path: str, packages: List[str]) -> Set[Any]:
 
 
 def get_requirements(file_path: str, no_precise_version: bool = False) -> List[str]:
-    requirements = []
+    _requirements = []
     try:
         with open(file_path, "rt") as r:
             for line in r.readlines():
@@ -72,10 +60,10 @@ def get_requirements(file_path: str, no_precise_version: bool = False) -> List[s
                     continue
                 if no_precise_version:
                     package = package.split("==")[0]
-                requirements.append(package)
+                _requirements.append(package)
     except FileExistsError:
         pass
-    return requirements
+    return _requirements
 
 
 def read(*names, **kwargs):
@@ -88,9 +76,7 @@ def read(*names, **kwargs):
 project_name = "cymorton"
 github_home = "https://github.com/decitre"
 
-
 if __name__ == '__main__':
-
     _packages_path = "src"
     _packages = find_packages(where=_packages_path)
     main_package_path = {
@@ -103,9 +89,19 @@ if __name__ == '__main__':
     requirements.extend(get_requirements("requirements.txt", no_precise_version=True))
     requirements_test = get_requirements("requirements_test.txt")
 
+    ext_modules = [
+        Extension(
+            splitext(relpath(path, 'src').replace(os.sep, '.'))[0],
+            sources=[path],
+            include_dirs=[dirname(path)],
+        )
+        for root, _, _ in os.walk('src')
+        for path in glob(join(root, '*.pyx'))
+    ]
+
     setup(
         name=project_name,
-        version='0.0.1',
+        version=version,
         license='MIT',
         description='A morton code codec in c++/cython',
         long_description=re.compile(
@@ -127,6 +123,7 @@ if __name__ == '__main__':
             'Programming Language :: Python :: 3.8',
             'Programming Language :: Python :: 3.9',
             'Programming Language :: Python :: 3.10',
+            'Programming Language :: Cython',
             'Programming Language :: Python :: Implementation :: CPython',
         ],
         project_urls={
@@ -136,22 +133,8 @@ if __name__ == '__main__':
         python_requires='>=3.6',
         install_requires=requirements,
         extras_require={"dev": requirements_test},
-        setup_requires=[
-            'cython',
-        ]
-        if Cython
-        else [],
+        setup_requires=['Cython'],
         entry_points={'console_scripts': [f'{project_name} = {project_name}.cli:main']},
-        ext_modules=[
-            Extension(
-                splitext(relpath(path, 'src').replace(os.sep, '.'))[0],
-                sources=[path],
-                extra_compile_args=CFLAGS.split(),
-                extra_link_args=LFLAGS.split(),
-                include_dirs=[dirname(path)],
-            )
-            for root, _, _ in os.walk('src')
-            for path in glob(join(root, '*.pyx' if Cython else '*.c'))
-        ],
+        ext_modules=cythonize(ext_modules, language_level="3"),
         distclass=BinaryDistribution,
     )

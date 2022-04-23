@@ -1,23 +1,10 @@
-"""
-Module that contains the command line app.
-
-Why does this file exist, and why not put this in __main__?
-
-  You might be tempted to import things from __main__ later, but that will cause
-  problems: the code will get executed twice:
-
-  - When you run `python -mcymorton` python will execute
-    ``__main__.py`` as a script. That means there won't be any
-    ``cymorton.__main__`` in ``sys.modules``.
-  - When you import __main__ it will get executed again (as a module) because
-    there's no ``cymorton.__main__`` in ``sys.modules``.
-
-  Also see (1) from http://click.pocoo.org/5/setuptools/#setuptools-integration
-"""
 import click
+from cymorton.codec import convert_lat_lon_level_to_code
 
 
 @click.command()
-@click.argument('names', nargs=-1)
-def main(names):
-    click.echo(repr(names))
+@click.argument('lat', type=click.FLOAT)
+@click.argument('lon', type=click.FLOAT)
+@click.argument('z', type=click.INT)
+def main(lat: float, lon: float, z: int):
+    click.echo(convert_lat_lon_level_to_code(lat, lon, z))
