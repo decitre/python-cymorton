@@ -26,7 +26,7 @@ True
 
 ```python
 >>> from cymorton.codec import test_convert_xy_level_to_code
->>>convert_xy_level_to_code(5, 2, 3) == 0b1011001
+>>> convert_xy_level_to_code(5, 2, 3) == 0b1011001
 True
 ```
 
