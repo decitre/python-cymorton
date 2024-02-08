@@ -34,7 +34,7 @@ homepage = "https://github.com/decitre/python-cymorton"
 
 [project.optional-dependencies]
 dev = [
-    "pytest", "pytest-recording", "urllib3<2",
+    "pytest", "pytest-recording", "pytest-cov", "urllib3<2",
     "bumpver", "black", "ruff", "pre-commit",
     "tox", "build", "twine"
 ]
