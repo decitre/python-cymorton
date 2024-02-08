@@ -25,4 +25,3 @@ cdef extern from '__codec.hpp' nogil:
         uint32_t getQuadY(uint64_t);
         unsigned char getQuadZ(uint64_t);
         uint8_t MAX_Z;
-

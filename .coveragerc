@@ -2,6 +2,7 @@
 source = src
 
 [run]
+plugins = Cython.Coverage
 branch = true
 source =
     src

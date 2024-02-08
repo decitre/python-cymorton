@@ -44,4 +44,3 @@ def convert_xy_level_to_code(uint32_t x, uint32_t y, unsigned char z):
 
 def convert_lat_lon_level_to_code(double latitude, double longitude, unsigned char z):
     return convertLatLonLevelToCode(latitude, longitude, z)
-

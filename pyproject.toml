@@ -1,12 +1,79 @@
 [build-system]
-requires = [
-    "setuptools>=30.3.0",
-    "wheel",
-    "Cython"
-]
+requires = ["setuptools>=42", "wheel", "Cython"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "cymorton"
+version = "0.1.0"
+description = "A morton code codec in c++/cython"
+readme = "README.rst"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+classifiers = [
+    "Intended Audience :: Developers",
+    'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python :: 3',
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    'Programming Language :: Cython',
+    'Programming Language :: Python :: Implementation :: CPython',
+    "Operating System :: OS Independent"
+]
+keywords=["morton", "z-curve"]
+dependencies = ["Cython"]
+
+[project.scripts]
+cymorton = "cymorton.cli:main"
+
+[project.urls]
+homepage = "https://github.com/decitre/python-cymorton"
+
+[project.optional-dependencies]
+dev = [
+    "pytest", "pytest-recording", "urllib3<2",
+    "bumpver", "black", "ruff", "pre-commit",
+    "tox", "build", "twine"
+]
+ci = [
+    "virtualenv>=16.6.0", "pip>=19.1.1", "setuptools>=18.0.1",
+    "six>=1.14.0", "tox>=4.12.1", "tox-gh>=1.2"
+]
 
 [tool.black]
 line-length = 88
-target-version = ['py39']
-skip-string-normalization = true
+target-version = ['py311']
+
+[tool.ruff]
+line-length = 88
+exclude = [
+    ".tox", ".eggs", "build", "dist", "__pycache__",
+    "docs/source/conf.py", "old", "env",
+]
+lint.ignore = ["COM812", "D103", "E501", "F401", "F403"]
+lint.select = ["B", "B9", "C", "E", "F", "W", "I001"]
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "double"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 18
+
+[tool.bumpver]
+current_version = "0.1.0"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit = false
+tag = false
+push = false
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = [
+    'version = "{version}"',
+]
+
+[tool.tox]
+# tox 4 supports pyproject.toml only through an inconveninent legacy_tox_ini string...
+# So we still keep tox.ini

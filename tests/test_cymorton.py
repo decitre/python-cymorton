@@ -1,15 +1,16 @@
 from click.testing import CliRunner
-
-from cymorton.codec import interleave_to_number
-from cymorton.codec import convert_xy_level_to_code
-from cymorton.codec import convert_lat_lon_level_to_code
 from cymorton.cli import main
+from cymorton.codec import (
+    convert_lat_lon_level_to_code,
+    convert_xy_level_to_code,
+    interleave_to_number,
+)
 
 
 def test_main():
     runner = CliRunner()
     result = runner.invoke(main, ["9.165507", "105.219986", "12"])
-    assert result.output == '24145105\n'
+    assert result.output == "24145105\n"
     assert result.exit_code == 0
 
 
